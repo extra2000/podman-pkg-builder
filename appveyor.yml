@@ -1,0 +1,26 @@
+os: Ubuntu2004
+platform:
+  - x64
+# install:
+#   - sudo apt update
+#   - sudo apt install ca-certificates
+#   - . /etc/os-release
+#   - echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+#   - curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key | sudo apt-key add -
+#   - sudo apt update
+#   - sudo apt -y upgrade
+#   - sudo apt -y install podman
+# build_script:
+#   - git clone -b v3.4.7 https://github.com/extra2000/podman.git ${APPVEYOR_BUILD_FOLDER}/src/podman
+#   - git clone https://pagure.io/rpkg-util.git ${APPVEYOR_BUILD_FOLDER}/src/rpkg
+#   - cd ${APPVEYOR_BUILD_FOLDER}/src/
+#   - sudo podman build -t extra2000/podman-pkg-builder .
+#   - podman run -it --rm -v ./src/podman:/opt/podman:rw -v ./rpms:/root/rpmbuild/RPMS:rw --workdir /opt/podman localhost/extra2000/podman-pkg-builder make package
+#   - cd ${APPVEYOR_BUILD_FOLDER}
+on_success:
+  - wget https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh
+  - sudo bash install.sh
+  - nvm install lts/*
+  - npm i -D semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/npm @semantic-release/github @semantic-release/git @semantic-release/exec @commitlint/cli @commitlint/config-conventional
+  - npx semantic-release
+test: off
