@@ -1,0 +1,5 @@
+rpms/*
+!rpms/.gitkeep
+
+src/*
+!src/Dockerfile*
